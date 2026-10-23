@@ -1,0 +1,181 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #121212;
+  color: #7ed2ff;
+  color-scheme: dark;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+body {
+  padding: 32px 16px 48px;
+}
+
+.app {
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-weight: 700;
+  color: #9ae0ff;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+.meter,
+.panel {
+  padding: 16px 0;
+  border-top: 1px solid #4a6a88;
+}
+
+.meter-top,
+.panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.meter-top,
+.save-note,
+.elapsed,
+.stats dt,
+.field span,
+.field-row em {
+  color: #5ec4f5;
+  font-size: 13px;
+}
+
+.fare {
+  margin: 10px 0 4px;
+  color: #9ae0ff;
+  font-variant-numeric: tabular-nums;
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.elapsed {
+  margin: 0 0 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0;
+}
+
+.stats dt,
+.stats dd {
+  margin: 0;
+}
+
+.stats dd {
+  margin-top: 4px;
+}
+
+.panel-head {
+  margin-bottom: 16px;
+}
+
+.save-note {
+  margin: 0;
+  text-align: right;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.field-row em {
+  font-style: normal;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #4a6a88;
+  border-radius: 4px;
+  background: #1a1a1a;
+  color: #7ed2ff;
+  font: inherit;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #7ed2ff;
+  outline-offset: 1px;
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-error {
+  margin: 0;
+  color: #f0b6b6;
+  font-size: 13px;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #7ed2ff;
+  border-radius: 4px;
+  background: #7ed2ff;
+  color: #121212;
+  font: inherit;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background: #9ae0ff;
+}
+
+@media (max-width: 520px) {
+  .panel-head {
+    display: grid;
+    gap: 4px;
+  }
+
+  .save-note {
+    text-align: left;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>시급 미터기</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>시급 미터기</h1>
+
+      <section class="meter" aria-live="polite">
+        <div class="meter-top">
+          <span>오늘의 요금</span>
+          <span id="status-pill">대기</span>
+        </div>
+        <p id="fare" class="fare">₩ 0</p>
+        <p id="elapsed" class="elapsed">00:00:00</p>
+        <dl class="stats">
+          <div>
+            <dt>시급</dt>
+            <dd id="hourly">—</dd>
+          </div>
+          <div>
+            <dt>초당</dt>
+            <dd id="per-second">—</dd>
+          </div>
+          <div>
+            <dt>하루 정산</dt>
+            <dd id="daily">—</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>근무 설정</h2>
+          <p id="save-note" class="save-note">저장하면 이 값이 기본값이 됩니다.</p>
+        </div>
+        <form id="settings-form" class="form" novalidate>
+          <label class="field">
+            <span>급여 기준</span>
+            <select id="pay-type" name="payType">
+              <option value="annual">연봉</option>
+              <option value="monthly">월급</option>
+            </select>
+          </label>
+          <label class="field">
+            <span id="amount-label">연봉</span>
+            <div class="field-row">
+              <input
+                id="salary"
+                name="salary"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="50,000,000"
+              />
+              <em>원</em>
+            </div>
+          </label>
+          <div class="time-grid">
+            <label class="field">
+              <span>출근</span>
+              <input id="start-time" name="startTime" type="time" required />
+            </label>
+            <label class="field">
+              <span>퇴근</span>
+              <input id="end-time" name="endTime" type="time" required />
+            </label>
+          </div>
+          <p id="form-error" class="form-error" hidden></p>
+          <button type="submit" class="save-btn">저장하고 미터 시작</button>
+        </form>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
