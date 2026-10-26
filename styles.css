@@ -54,6 +54,7 @@ h2 {
 .meter-top,
 .save-note,
 .elapsed,
+.hint,
 .stats dt,
 .field span,
 .field-row em {
@@ -80,6 +81,10 @@ h2 {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin: 0;
+}
+
+.stats + .stats {
+  margin-top: 12px;
 }
 
 .stats dt,
@@ -144,10 +149,14 @@ select:focus {
   gap: 12px;
 }
 
+.hint,
 .form-error {
   margin: 0;
-  color: #f0b6b6;
   font-size: 13px;
+}
+
+.form-error {
+  color: #f0b6b6;
 }
 
 .save-btn {

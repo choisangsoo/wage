@@ -27,8 +27,22 @@
             <dd id="per-second">—</dd>
           </div>
           <div>
-            <dt>하루 정산</dt>
+            <dt id="daily-label">하루 정산</dt>
             <dd id="daily">—</dd>
+          </div>
+        </dl>
+        <dl class="stats">
+          <div>
+            <dt>부양가족</dt>
+            <dd id="family-count">—</dd>
+          </div>
+          <div>
+            <dt>20세 이하 자녀</dt>
+            <dd id="child-count">—</dd>
+          </div>
+          <div>
+            <dt>월 비과세액</dt>
+            <dd id="tax-free">—</dd>
           </div>
         </dl>
       </section>
@@ -70,6 +84,41 @@
               <input id="end-time" name="endTime" type="time" required />
             </label>
           </div>
+          <div class="time-grid">
+            <label class="field">
+              <span>부양가족수(본인포함)</span>
+              <div class="field-row">
+                <input
+                  id="dependents"
+                  name="dependents"
+                  type="number"
+                  inputmode="numeric"
+                  min="1"
+                  max="20"
+                  step="1"
+                  required
+                />
+                <em>명</em>
+              </div>
+            </label>
+            <label class="field">
+              <span>20세 이하 자녀수</span>
+              <div class="field-row">
+                <input
+                  id="children"
+                  name="children"
+                  type="number"
+                  inputmode="numeric"
+                  min="0"
+                  max="19"
+                  step="1"
+                  required
+                />
+                <em>명</em>
+              </div>
+            </label>
+          </div>
+          <p class="hint">월 비과세액 = 기본공제(1인 연 150만원) ÷ 12 + 자녀세액공제(2026 간이세액표, 8~20세)</p>
           <p id="form-error" class="form-error" hidden></p>
           <button type="submit" class="save-btn">저장하고 미터 시작</button>
         </form>
