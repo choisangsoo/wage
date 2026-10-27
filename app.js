@@ -38,7 +38,7 @@ function loadSettings() {
     if (!parsed?.salary || !parsed?.startTime || !parsed?.endTime) return null;
     return {
       ...parsed,
-      payType: parsed.payType === "monthly" ? "monthly" : "annual",
+      payType: normalizePayType(parsed.payType),
       dependents: normalizeDependents(parsed.dependents),
       children: normalizeChildren(parsed.children, normalizeDependents(parsed.dependents)),
     };
@@ -107,8 +107,15 @@ function dailyHours(start, end) {
   return minutes / 60;
 }
 
-function annualSalary(current) {
-  return current.payType === "monthly" ? current.salary * 12 : current.salary;
+function normalizePayType(value) {
+  if (value === "monthly" || value === "daily") return value;
+  return "annual";
+}
+
+function dailyAmount(current, workDays) {
+  if (current.payType === "daily") return current.salary;
+  if (current.payType === "monthly") return current.salary / workDays;
+  return current.salary / 12 / workDays;
 }
 
 const LUNAR_HOLIDAYS = {
@@ -223,19 +230,23 @@ function workDaysInMonth(now) {
 }
 
 function payLabel(payType) {
-  return payType === "monthly" ? "월급" : "연봉";
+  if (payType === "monthly") return "월급";
+  if (payType === "daily") return "일급";
+  return "연봉";
 }
 
 function syncPayTypeUi(payType) {
-  const type = payType === "monthly" ? "monthly" : "annual";
+  const type = normalizePayType(payType);
   amountLabel.textContent = payLabel(type);
-  salaryInput.placeholder = type === "monthly" ? "4,000,000" : "50,000,000";
+  if (type === "monthly") salaryInput.placeholder = "4,000,000";
+  else if (type === "daily") salaryInput.placeholder = "200,000";
+  else salaryInput.placeholder = "50,000,000";
 }
 
 function rates(current, now) {
   const hours = dailyHours(parseClock(current.startTime), parseClock(current.endTime));
   const workDays = Math.max(1, workDaysInMonth(now));
-  const daily = annualSalary(current) / 12 / workDays;
+  const daily = dailyAmount(current, workDays);
   const hourly = daily / hours;
   return {
     hours,
@@ -334,7 +345,7 @@ function renderMeter(now) {
 }
 
 function fillForm(current) {
-  const payType = current?.payType === "monthly" ? "monthly" : "annual";
+  const payType = normalizePayType(current?.payType);
   payTypeInput.value = payType;
   syncPayTypeUi(payType);
   salaryInput.value = current ? formatSalary(current.salary) : "";
@@ -363,7 +374,7 @@ salaryInput.addEventListener("input", () => {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const payType = payTypeInput.value === "monthly" ? "monthly" : "annual";
+  const payType = normalizePayType(payTypeInput.value);
   const salary = parseSalary(salaryInput.value);
   const startTime = startInput.value;
   const endTime = endInput.value;
